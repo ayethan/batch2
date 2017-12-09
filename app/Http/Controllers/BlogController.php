@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Blog;
-
 use Illuminate\Http\Request;
-
 class BlogController extends Controller
 {
     /**
@@ -13,14 +10,10 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {
         $blogs = Blog::all();
-
-        dd($blogs);
-         return view('blog.index');
+        return view('blog.index', compact('blogs'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +23,6 @@ class BlogController extends Controller
     {
         return view('blog.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -41,7 +33,6 @@ class BlogController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -50,9 +41,9 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-       return view('blog.show');
+        $blog = Blog::find($id);
+        return view('blog.show', compact('blog'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -63,7 +54,6 @@ class BlogController extends Controller
     {
         return view('blog.edit');
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -75,7 +65,6 @@ class BlogController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
