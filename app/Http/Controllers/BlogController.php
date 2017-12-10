@@ -5,6 +5,16 @@ use Session;
 use Illuminate\Http\Request;
 class BlogController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->execpt('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -12,7 +22,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::latest()->get();
+        $blogs = Blog::latest()->paginate(10);
         return view('blog.index', compact('blogs'));
     }
     /**
